@@ -3,7 +3,6 @@ simpleAuras = simpleAuras or {}
 
 -- runtime only
 sA = sA or { auraTimers = {}, frames = {}, dualframes = {} }
-sA.SuperWoW = SetAutoloot and true or false
 sAinCombat = nil
 
 -- perf: cache globals we use a lot (Lua 5.0-safe)
@@ -19,6 +18,14 @@ local GetTime = GetTime
 sA.PREFIX = "|c194b7dccsimple|cffffffffAuras: "
 function sA:Msg(msg)
   DEFAULT_CHAT_FRAME:AddMessage(self.PREFIX .. msg)
+end
+
+-- SuperWoW detected? 
+sA.SuperWoW = SetAutoloot and true or false
+if not sA.SuperWoW then
+    sA:Msg("No SuperWoW detected!")
+else
+    sA:Msg("SuperWoW detected!")
 end
 
 -- Track temporary casts for updating durations

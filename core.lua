@@ -210,7 +210,7 @@ function sA:UpdateAuras()
       end
 
       if aura.type == "Cooldown" then
-        show = (aura.invert == 1 and not currentDuration) or (aura.dual == 1 and currentDuration) and 1 or 0
+        show = ((aura.invert == 1 and not currentDuration) or (aura.dual == 1 and currentDuration)) and 1 or 0
       elseif aura.invert == 1 then
         show = 1 - (show or 0)
       end
