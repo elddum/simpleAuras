@@ -200,7 +200,7 @@ function sA:UpdateAuras()
         icon, duration, stacks = self:GetSuperAuraInfos(aura.name, aura.unit, aura.type)
       else
         icon, duration, stacks = self:GetAuraInfos(aura.name, aura.unit, aura.type)
-      end
+      end       
 
       if icon then
         show, currentDuration, currentStacks = 1, duration, stacks
@@ -273,7 +273,12 @@ function sA:UpdateAuras()
       end
       frame.durationtext:SetTextColor(unpack(durationcolor))
       frame.stackstext:SetTextColor(unpack(stackcolor))
-      frame:Show()
+
+      if aura.type == "Cooldown" and not icon then 
+        frame:Hide()
+      else
+        frame:Show()
+      end
 
       -------------------------------------------------
       -- Dual frame
@@ -295,6 +300,11 @@ function sA:UpdateAuras()
         if aura.stacks   == 1 then dualframe.stackstext:SetFont(FONT, 14 * scale, "OUTLINE") end
         dualframe.durationtext:SetTextColor(unpack(durationcolor))
         dualframe:Show()
+        if aura.type == "Cooldown" and not icon then 
+          dualframe:Hide()
+        else 
+          dualframe:Show()
+        end
       elseif dualframe then
         dualframe:Hide()
       end
@@ -303,4 +313,5 @@ function sA:UpdateAuras()
       if dualframe then dualframe:Hide() end
     end
   end
+  
 end
